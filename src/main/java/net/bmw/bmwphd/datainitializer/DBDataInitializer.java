@@ -47,6 +47,10 @@ public class DBDataInitializer implements CommandLineRunner {
             }
             //ArrayList<String> horse = Arrays.asList(line.split(splitBy));
             String[] employee = line.split(splitBy);    // use comma as separator
+//            for (String emp: employee) {
+//                //emp.toLowerCase();
+//                emp = emp.substring(0,1).toUpperCase() + emp.substring(1).toLowerCase();
+//            }
             horses.add(employee);
             //horses[i] = employee;
             System.out.println(horses.get(i));
@@ -62,31 +66,44 @@ public class DBDataInitializer implements CommandLineRunner {
         }
 
 
-        Horse h1 = new Horse();
-        h1.setId(horses.get(0)[0]);
-        h1.setName(horses.get(0)[1]);
-        h1.setSire(horses.get(0)[2]);
-        h1.setDam(horses.get(0)[3]);
+//        Horse h1 = new Horse();
+//        h1.setId(horses.get(0)[0]);
+//        h1.setName(horses.get(0)[1]);
+//        h1.setSire(horses.get(0)[2]);
+//        h1.setDam(horses.get(0)[3]);
 
-//        h1.setName(horses[0][1]);
-//        h1.setSire(horses[0][2]);
-//        h1.setDam(horses[0][3]);
-//        h1.setId("fjbofbwebw");
-//        h1.setName("Jerry");
-//        h1.setDam("JM");
-//        h1.setSire("JD");
+        for(int k = 0; k < horses.size(); k++){
+            horseDao.save(new Horse(horses.get(k)[0], horses.get(k)[1], horses.get(k)[2], horses.get(k)[3]));
+        }
 
-        Horse h2 = new Horse();
-        h2.setId(horses.get(1)[0]);
-        h2.setName(horses.get(1)[1]);
-        h2.setSire(horses.get(1)[2]);
-        h2.setDam(horses.get(1)[3]);
-//        h2.setId("kopokppo");
-//        h2.setName("Chirayu");
-//        h2.setDam("CM");
-//        h2.setSire("CD");
-
-        horseDao.save(h1);
-        horseDao.save(h2);
+//        Horse h2 = new Horse();
+//        h2.setId(horses.get(1)[0]);
+//        h2.setName(horses.get(1)[1]);
+//        h2.setSire(horses.get(1)[2]);
+//        h2.setDam(horses.get(1)[3]);
+////        h2.setId("kopokppo");
+////        h2.setName("Chirayu");
+////        h2.setDam("CM");
+////        h2.setSire("CD");
+//        Horse h3 = new Horse();
+//        h3.setId(horses.get(2)[0]);
+//        h3.setName(horses.get(2)[1]);
+//        h3.setSire(horses.get(1)[2]);
+//        h3.setDam(horses.get(1)[3]);
+//
+//        Horse h4 = new Horse();
+//        h4.setId(horses.get(1)[0]);
+//        h4.setName(horses.get(1)[1]);
+//        h4.setSire(horses.get(1)[2]);
+//        h4.setDam(horses.get(1)[3]);
+//
+//        Horse h5 = new Horse();
+//        h5.setId(horses.get(1)[0]);
+//        h5.setName(horses.get(1)[1]);
+//        h5.setSire(horses.get(1)[2]);
+//        h5.setDam(horses.get(1)[3]);
+//
+//        horseDao.save(h1);
+//        horseDao.save(h2);
     }
 }

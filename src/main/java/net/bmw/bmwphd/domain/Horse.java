@@ -19,6 +19,13 @@ public class Horse implements Serializable {
     public Horse() {
     }
 
+    public Horse(String id, String name, String sire, String dam){
+        this.id = id;
+        this.name = name;
+        this.sire = sire;
+        this.dam = dam;
+    }
+
     public String getId() {
         return id;
     }
