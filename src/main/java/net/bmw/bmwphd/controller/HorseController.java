@@ -27,7 +27,7 @@ public class HorseController {
         return result;
     }
 
-    @GetMapping(value = "/search")
+    @PostMapping(value = "/search")
     public Result findSearch(@RequestBody Map searchMap) {
         return new Result(true, StatusCode.SUCCESS, "Query Successful", horseService.findSearch(searchMap));
     }
