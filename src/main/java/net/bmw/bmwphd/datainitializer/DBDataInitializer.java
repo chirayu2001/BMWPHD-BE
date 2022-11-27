@@ -73,7 +73,7 @@ public class DBDataInitializer implements CommandLineRunner {
 //        h1.setDam(horses.get(0)[3]);
 
         for(int k = 0; k < horses.size(); k++){
-            horseDao.save(new Horse(horses.get(k)[0], horses.get(k)[1], horses.get(k)[2], horses.get(k)[3]));
+            horseDao.save(new Horse(horses.get(k)[0], horses.get(k)[1], horses.get(k)[2], horses.get(k)[3], horses.get(k)[4], horses.get(k)[5]));
         }
 
 //        Horse h2 = new Horse();
