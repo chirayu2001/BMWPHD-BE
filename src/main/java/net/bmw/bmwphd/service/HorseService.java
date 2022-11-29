@@ -45,13 +45,18 @@ public class HorseService {
                 if (searchMap.get("name") != null && !"".equals(searchMap.get("name"))) {
                     predicateList.add(cb.like(root.get("name").as(String.class), "%" + (String) searchMap.get("name") + "%"));
                 }
-                if (searchMap.get("dam") != null && !"".equals(searchMap.get("dam"))) {
-                    predicateList.add(cb.like(root.get("dam").as(String.class), "%" + (String) searchMap.get("dam") + "%"));
+                if (searchMap.get("dam1") != null && !"".equals(searchMap.get("dam1"))) {
+                    predicateList.add(cb.like(root.get("dam1").as(String.class), "%" + (String) searchMap.get("dam1") + "%"));
                 }
-                if (searchMap.get("sire") != null && !"".equals(searchMap.get("sire"))) {
-                    predicateList.add(cb.like(root.get("sire").as(String.class), "%" + (String) searchMap.get("sire") + "%"));
+                if (searchMap.get("sire1") != null && !"".equals(searchMap.get("sire1"))) {
+                    predicateList.add(cb.like(root.get("sire1").as(String.class), "%" + (String) searchMap.get("sire1") + "%"));
                 }
-
+                if (searchMap.get("dam2") != null && !"".equals(searchMap.get("dam2"))) {
+                    predicateList.add(cb.like(root.get("dam2").as(String.class), "%" + (String) searchMap.get("dam2") + "%"));
+                }
+                if (searchMap.get("sire2") != null && !"".equals(searchMap.get("sire2"))) {
+                    predicateList.add(cb.like(root.get("sire2").as(String.class), "%" + (String) searchMap.get("sire2") + "%"));
+                }
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
 
             }
