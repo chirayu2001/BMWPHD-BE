@@ -19,6 +19,12 @@ public class Horse implements Serializable {
     private String dam1;
     private String sire2;
     private String dam2;
+    private String maneuver_score;
+    private String lte;
+    private String pe;
+    private String show;
+    private String horse_class;
+    private String level;
 
     public Horse() {
     }
@@ -30,6 +36,69 @@ public class Horse implements Serializable {
         this.dam1 = dam1;
         this.sire2 = sire2;
         this.dam2 = dam2;
+    }
+
+    public Horse(String id, String name, String sire1, String dam1, String sire2, String dam2, String maneuver_score, String lte, String pe, String show, String horse_class, String level) {
+        this.id = id;
+        this.name = name;
+        this.sire1 = sire1;
+        this.dam1 = dam1;
+        this.sire2 = sire2;
+        this.dam2 = dam2;
+        this.maneuver_score = maneuver_score;
+        this.lte = lte;
+        this.pe = pe;
+        this.show = show;
+        this.horse_class = horse_class;
+        this.level = level;
+    }
+
+    public String getManeuver_score() {
+        return maneuver_score;
+    }
+
+    public void setManeuver_score(String maneuver_score) {
+        this.maneuver_score = maneuver_score;
+    }
+
+    public String getLte() {
+        return lte;
+    }
+
+    public void setLte(String lte) {
+        this.lte = lte;
+    }
+
+    public String getPe() {
+        return pe;
+    }
+
+    public void setPe(String pe) {
+        this.pe = pe;
+    }
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
+
+    public String getHorse_class() {
+        return horse_class;
+    }
+
+    public void setHorse_class(String horse_class) {
+        this.horse_class = horse_class;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getId() {

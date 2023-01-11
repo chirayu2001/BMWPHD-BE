@@ -54,8 +54,23 @@ public class HorseService {
                 if (searchMap.get("dam2") != null && !"".equals(searchMap.get("dam2"))) {
                     predicateList.add(cb.like(root.get("dam2").as(String.class), "%" + (String) searchMap.get("dam2") + "%"));
                 }
-                if (searchMap.get("sire2") != null && !"".equals(searchMap.get("sire2"))) {
-                    predicateList.add(cb.like(root.get("sire2").as(String.class), "%" + (String) searchMap.get("sire2") + "%"));
+                if (searchMap.get("maneuver_score") != null && !"".equals(searchMap.get("maneuver_score"))) {
+                    predicateList.add(cb.like(root.get("maneuver_score").as(String.class), "%" + (String) searchMap.get("maneuver_score") + "%"));
+                }
+                if (searchMap.get("lte") != null && !"".equals(searchMap.get("lte"))) {
+                    predicateList.add(cb.like(root.get("lte").as(String.class), "%" + (String) searchMap.get("lte") + "%"));
+                }
+                if (searchMap.get("pe") != null && !"".equals(searchMap.get("pe"))) {
+                    predicateList.add(cb.like(root.get("pe").as(String.class), "%" + (String) searchMap.get("pe") + "%"));
+                }
+                if (searchMap.get("show") != null && !"".equals(searchMap.get("show"))) {
+                    predicateList.add(cb.like(root.get("show").as(String.class), "%" + (String) searchMap.get("show") + "%"));
+                }
+                if (searchMap.get("horse_class") != null && !"".equals(searchMap.get("horse_class"))) {
+                    predicateList.add(cb.like(root.get("horse_class").as(String.class), "%" + (String) searchMap.get("horse_class") + "%"));
+                }
+                if (searchMap.get("level") != null && !"".equals(searchMap.get("level"))) {
+                    predicateList.add(cb.like(root.get("level").as(String.class), "%" + (String) searchMap.get("level") + "%"));
                 }
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
 

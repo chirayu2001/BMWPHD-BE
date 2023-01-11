@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 @Component
 public class DBDataInitializer implements CommandLineRunner {
@@ -46,12 +45,12 @@ public class DBDataInitializer implements CommandLineRunner {
                 ex.printStackTrace();
             }
             //ArrayList<String> horse = Arrays.asList(line.split(splitBy));
-            String[] employee = line.split(splitBy);    // use comma as separator
+            String[] horse = line.split(splitBy);    // use comma as separator
 //            for (String emp: employee) {
 //                //emp.toLowerCase();
 //                emp = emp.substring(0,1).toUpperCase() + emp.substring(1).toLowerCase();
 //            }
-            horses.add(employee);
+            horses.add(horse);
             //horses[i] = employee;
             System.out.println(horses.get(i));
             //System.out.println("Name: " + horses.get(0)[1]);
