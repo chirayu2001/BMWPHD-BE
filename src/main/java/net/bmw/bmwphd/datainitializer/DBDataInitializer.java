@@ -2,7 +2,9 @@ package net.bmw.bmwphd.datainitializer;
 
 import net.bmw.bmwphd.dao.HorseDao;
 import net.bmw.bmwphd.domain.Horse;
+import net.bmw.bmwphd.domain.User;
 import net.bmw.bmwphd.service.HorseService;
+import net.bmw.bmwphd.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +18,13 @@ import java.util.ArrayList;
 public class DBDataInitializer implements CommandLineRunner {
     private HorseDao horseDao;
     private HorseService horseService;
+    private UserService userService;
     ArrayList<String[]> horses = new ArrayList<>();
     //ArrayList<ArrayList<String>> horses = new ArrayList<>();
-    public DBDataInitializer(HorseDao horseDao, HorseService horseService) {
+    public DBDataInitializer(HorseDao horseDao, HorseService horseService, UserService userService) {
         this.horseDao = horseDao;
         this.horseService = horseService;
+        this.userService = userService;
     }
 
 
@@ -33,7 +37,8 @@ public class DBDataInitializer implements CommandLineRunner {
         //parsing a CSV file into BufferedReader class constructor
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("horses.csv"));
+           // br = new BufferedReader(new FileReader("horses.csv"));
+            br = new BufferedReader(new FileReader("horses_2009-2022.csv"));
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -70,9 +75,10 @@ public class DBDataInitializer implements CommandLineRunner {
 //        h1.setName(horses.get(0)[1]);
 //        h1.setSire(horses.get(0)[2]);
 //        h1.setDam(horses.get(0)[3]);
-
-        for(int k = 0; k < horses.size(); k++){
-            horseDao.save(new Horse(horses.get(k)[0], horses.get(k)[1], horses.get(k)[2], horses.get(k)[3], horses.get(k)[4], horses.get(k)[5]));
+        int j = 0;
+        for(int k = 1; k < horses.size(); k++){
+            j++;
+            horseDao.save(new Horse(Integer.toString(j), horses.get(k)[0], horses.get(k)[1], horses.get(k)[2], horses.get(k)[3], horses.get(k)[4], horses.get(k)[5], horses.get(k)[6]));
         }
 
 //        Horse h2 = new Horse();
@@ -104,5 +110,20 @@ public class DBDataInitializer implements CommandLineRunner {
 //
 //        horseDao.save(h1);
 //        horseDao.save(h2);
+        User u4 = new User();
+        u4.setPassword("123");
+        u4.setName("Chiyaru");
+        u4.setEmail("chiyaru@tcu.edu");
+        u4.setRole("Judge");
+
+        User u6 = new User();
+        u6.setPassword("123");
+        u6.setName("Madison");
+        u6.setEmail("madison@tcu.edu");
+        u6.setRole("Fan");
+
+        userService.save(u4);
+        userService.save(u6);
+
     }
 }

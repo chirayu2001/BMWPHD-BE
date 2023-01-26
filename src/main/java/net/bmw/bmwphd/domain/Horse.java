@@ -25,8 +25,23 @@ public class Horse implements Serializable {
     private String show;
     private String horse_class;
     private String level;
+    private String foal_date;
+    private String european_opt;
+    private String year;
+    private String nominator;
 
     public Horse() {
+    }
+
+    public Horse(String id, String name, String sire1, String dam1, String foal_date, String nominator, String european_opt,String year){
+        this.id = id;
+        this.name = name;
+        this.sire1 = sire1;
+        this.dam1 = dam1;
+        this.foal_date = foal_date;
+        this.nominator = nominator;
+        this.european_opt = european_opt;
+        this.year = year;
     }
 
     public Horse(String id, String name, String sire1, String dam1, String sire2, String dam2){
@@ -147,5 +162,37 @@ public class Horse implements Serializable {
 
     public void setDam2(String dam2) {
         this.dam2 = dam2;
+    }
+
+    public String getFoal_date() {
+        return foal_date;
+    }
+
+    public void setFoal_date(String foal_date) {
+        this.foal_date = foal_date;
+    }
+
+    public String getEuropean_opt() {
+        return european_opt;
+    }
+
+    public void setEuropean_opt(String european_opt) {
+        this.european_opt = european_opt;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getNominator() {
+        return nominator;
+    }
+
+    public void setNominator(String nominator) {
+        this.nominator = nominator;
     }
 }
