@@ -58,9 +58,9 @@ public class SecurityConfiguration {
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
 
-    @Value("${pubKey}")
+    @Value("${jwt.public.key}")
     RSAPublicKey key;
-    @Value("${privKey}")
+    @Value("${jwt.private.key}")
     RSAPrivateKey priv;
 
     @Value("${pubKey}")
