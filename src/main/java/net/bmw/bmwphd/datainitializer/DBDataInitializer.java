@@ -57,7 +57,7 @@ public class DBDataInitializer implements CommandLineRunner {
 //            }
             horses.add(horse);
             //horses[i] = employee;
-            System.out.println(horses.get(i));
+           // System.out.println(horses.get(i));
             //System.out.println("Name: " + horses.get(0)[1]);
             //System.out.println(horses[0][i]);
             i++;
