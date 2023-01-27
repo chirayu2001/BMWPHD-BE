@@ -1,10 +1,19 @@
 package net.bmw.bmwphd.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ChangeRequest {
+    @Id
     private Integer id;
     private String columnName;
     private String suggestedChange;
     private Integer ownerId;
+
+    public ChangeRequest(){
+
+    }
 
     public ChangeRequest(Integer id, String columnName, String suggestedChange, Integer ownerId) {
         this.id = id;
