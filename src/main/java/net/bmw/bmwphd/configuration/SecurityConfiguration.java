@@ -26,6 +26,7 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -49,7 +50,7 @@ public class SecurityConfiguration {
 //    RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
 //    RSAPublicKey key = myPublicKeyConverter.convert(pubKeyString);
 
-    KeyFactory kf = KeyFactory.getInstance("RSA");
+   // KeyFactory kf = KeyFactory.getInstance("RSA");
 //
 //    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
 //    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
@@ -63,21 +64,22 @@ public class SecurityConfiguration {
     @Value("${jwt.private.key}")
     RSAPrivateKey priv;
 
-    @Value("${pubKey}")
-    String pubKeyString;
-
-    public SecurityConfiguration() throws NoSuchAlgorithmException {
-    }
+//    @Value("${usePubKey}")
+//    String pubKeyString;
+//
+//
+//    public SecurityConfiguration() throws NoSuchAlgorithmException {
+//    }
 
 //    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
 //    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("Key from heroku: " + pubKeyString);
+        //System.out.println("Key from heroku: " + pubKeyString);
         //RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
-        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
-        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+//        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+//        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
         //System.out.println("after conversion: " + myKey.toString());
 
