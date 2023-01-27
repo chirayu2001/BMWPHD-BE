@@ -44,6 +44,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authorize) -> authorize
                         .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ROLE_admin")
                         .antMatchers(HttpMethod.GET, "/horses").permitAll()
+                        .antMatchers(HttpMethod.GET, "/").permitAll()
+                        .antMatchers(HttpMethod.GET, "/horses/search").permitAll()
                         // Disallow everything else...
                         .anyRequest().authenticated()
                 )
