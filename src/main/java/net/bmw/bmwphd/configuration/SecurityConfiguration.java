@@ -38,18 +38,24 @@ import java.util.Base64;
 
 @Configuration
 public class SecurityConfiguration {
+
+    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
+    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
     @Value("${pubKey}")
     String pubKeyString;
     @Value("${privKey}")
     String privKeyString;
 
-    KeyFactory kf = KeyFactory.getInstance("RSA");
+    RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
+    RSAPublicKey key = myPublicKeyConverter.convert(pubKeyString);
 
-    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
-    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
-
-    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
+//    KeyFactory kf = KeyFactory.getInstance("RSA");
+//
+//    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+//    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+//
+//    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+//    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
 
 //    @Value("${pubKey}")
