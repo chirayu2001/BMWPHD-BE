@@ -26,16 +26,39 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 @Configuration
 public class SecurityConfiguration {
 
     @Value("${jwt.public.key}")
-    RSAPublicKey key;
-    @Value("${jwt.private.key}")
-    RSAPrivateKey priv;
+    String privateString;
+    @Value("${jwt.public.key}")
+    String publicString;
+
+    KeyFactory kf = KeyFactory.getInstance("RSA");
+
+    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateString));
+    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+
+    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(publicString));
+    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
+
+//    @Value("${jwt.public.key}")
+//    RSAPublicKey key;
+//    @Value("${jwt.private.key}")
+//    RSAPrivateKey priv;
+
+    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
