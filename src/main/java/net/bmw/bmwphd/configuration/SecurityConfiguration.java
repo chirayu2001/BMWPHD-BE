@@ -39,8 +39,8 @@ import java.util.Base64;
 @Configuration
 public class SecurityConfiguration {
 
-//    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
-//    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
+    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
+    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
 //    @Value("${pubKey}")
 //    String pubKeyString;
 //    @Value("${privKey}")
@@ -72,6 +72,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("Key from heroku: " + pubKeyString);
+        //RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
+        RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
+        System.out.println("after conversion: " + myKey.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
