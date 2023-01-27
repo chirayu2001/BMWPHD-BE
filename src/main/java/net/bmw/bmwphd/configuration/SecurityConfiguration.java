@@ -66,6 +66,8 @@ public class SecurityConfiguration {
 
     @Value("${pubKey}")
     String pubKeyString;
+    @Value("${privKey}")
+    String privKeyString;
 
     public SecurityConfiguration() throws NoSuchAlgorithmException {
     }
@@ -80,11 +82,15 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("Key from heroku: " + pubKeyString);
-       // RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
+//        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
-        //SAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
-        System.out.println("after conversion: " + myKey.toString());
+        //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
+        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+        RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+
+        System.out.println("after conversion Public: " + myKey.toString());
+        System.out.println("after conversion private: " + priv.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
