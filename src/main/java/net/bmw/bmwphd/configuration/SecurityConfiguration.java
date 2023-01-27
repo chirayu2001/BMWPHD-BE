@@ -38,27 +38,27 @@ import java.util.Base64;
 
 @Configuration
 public class SecurityConfiguration {
-//    @Value("${jwt.public.key}")
-//    String pubKeyString;
-//    @Value("${jwt.private.key}")
-//    String privKeyString;
-
-    //KeyFactory kf = KeyFactory.getInstance("RSA");
-
-//    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
-//    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
-//
-//    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-//    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
-
-
     @Value("${pubKey}")
-    RSAPublicKey key;
+    String pubKeyString;
     @Value("${privKey}")
-    RSAPrivateKey priv;
+    String privKeyString;
 
-//    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
-//    }
+    KeyFactory kf = KeyFactory.getInstance("RSA");
+
+    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+
+    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
+
+
+//    @Value("${pubKey}")
+//    RSAPublicKey key;
+//    @Value("${privKey}")
+//    RSAPrivateKey priv;
+
+    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
