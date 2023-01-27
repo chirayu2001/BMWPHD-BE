@@ -39,15 +39,15 @@ import java.util.Base64;
 @Configuration
 public class SecurityConfiguration {
 
-    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
-    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
-    @Value("${pubKey}")
-    String pubKeyString;
-    @Value("${privKey}")
-    String privKeyString;
-
-    RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
-    RSAPublicKey key = myPublicKeyConverter.convert(pubKeyString);
+//    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
+//    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
+//    @Value("${pubKey}")
+//    String pubKeyString;
+//    @Value("${privKey}")
+//    String privKeyString;
+//
+//    RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
+//    RSAPublicKey key = myPublicKeyConverter.convert(pubKeyString);
 
 //    KeyFactory kf = KeyFactory.getInstance("RSA");
 //
@@ -58,17 +58,21 @@ public class SecurityConfiguration {
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
 
-//    @Value("${pubKey}")
-//    RSAPublicKey key;
-//    @Value("${privKey}")
-//    RSAPrivateKey priv;
+    @Value("${pubKey}")
+    RSAPublicKey key;
+    @Value("${privKey}")
+    RSAPrivateKey priv;
 
-    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
-    }
+    @Value("${pubKey}")
+    String pubKeyString;
+
+//    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("Key: " + key.toString());
+        System.out.println("Key from heroku: " + pubKeyString);
+
         // @formatter:off
         http.cors(Customizer.withDefaults())
                 .authorizeHttpRequests((authorize) -> authorize
