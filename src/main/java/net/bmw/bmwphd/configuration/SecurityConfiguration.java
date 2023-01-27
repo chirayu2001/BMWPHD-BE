@@ -50,7 +50,8 @@ public class SecurityConfiguration {
 //    RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
 //    RSAPublicKey key = myPublicKeyConverter.convert(pubKeyString);
 
-   // KeyFactory kf = KeyFactory.getInstance("RSA");
+
+    // KeyFactory kf = KeyFactory.getInstance("RSA");
 //
 //    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
 //    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
@@ -58,14 +59,13 @@ public class SecurityConfiguration {
 //    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
-
     @Value("${jwt.public.key}")
     RSAPublicKey key;
     @Value("${jwt.private.key}")
     RSAPrivateKey priv;
 
-//    @Value("${usePubKey}")
-//    String pubKeyString;
+    @Value("${pubKey}")
+    String pubKeyString;
 //
 //
 //    public SecurityConfiguration() throws NoSuchAlgorithmException {
@@ -76,7 +76,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //System.out.println("Key from heroku: " + pubKeyString);
+        System.out.println("Key from heroku: " + pubKeyString);
         //RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
 //        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
 //        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
