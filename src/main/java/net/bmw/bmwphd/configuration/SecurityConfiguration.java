@@ -74,7 +74,7 @@ public class SecurityConfiguration {
         System.out.println("Key from heroku: " + pubKeyString);
         //RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
         RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
-        System.out.println("after conversion: " + myKey.toString());
+        //System.out.println("after conversion: " + myKey.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
