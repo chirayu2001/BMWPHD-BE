@@ -6,9 +6,12 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -39,10 +42,16 @@ import java.util.Base64;
 @Configuration
 public class SecurityConfiguration {
 
-    @Value("${jwt.public.key}")
-    String privateString;
-    @Value("${jwt.public.key}")
-    String publicString;
+    @Autowired
+    private Environment environment;
+
+    String privateString = environment.getProperty("jwt.public.key");
+    String publicString = environment.getProperty("jwt.public.key");
+
+//    @Value("${jwt.public.key}")
+//    String privateString;
+//    @Value("${jwt.public.key}")
+//    String publicString;
 
     KeyFactory kf = KeyFactory.getInstance("RSA");
 
