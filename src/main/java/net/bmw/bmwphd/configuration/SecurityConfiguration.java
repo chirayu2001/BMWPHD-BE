@@ -68,7 +68,7 @@ public class SecurityConfiguration {
     @Value("${pubKey}")
     String pubKeyString;
     @Value("${privKey}")
-    RSAPrivateKey privKeyString;
+    String privKeyString;
 
     public SecurityConfiguration() throws NoSuchAlgorithmException {
     }
@@ -93,11 +93,14 @@ public class SecurityConfiguration {
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(privBytes);
-       // PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-       // RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+        byte[] binCpk = Base64.getMimeDecoder().decode(privKeyString);
+        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
+
+//        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
 
-        System.out.println("after conversion private: " + privKeyString.toString());
+        System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
