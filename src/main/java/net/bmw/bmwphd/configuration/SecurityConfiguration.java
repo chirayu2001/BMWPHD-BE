@@ -61,16 +61,21 @@ public class SecurityConfiguration {
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
 //    @Value("${jwt.public.key}")
-    RSAPublicKey key;
+   // RSAPublicKey key;
 //    @Value("${jwt.private.key}")
-    RSAPrivateKey priv;
+   // RSAPrivateKey priv;
 
     @Value("${pubKey}")
     String pubKeyString;
     @Value("${privKey}")
     String privKeyString;
 
-    public SecurityConfiguration() throws NoSuchAlgorithmException {
+    int mod4 = privKeyString.length() % 4;
+
+    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));
+    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
+
+    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
     }
 //
 //
