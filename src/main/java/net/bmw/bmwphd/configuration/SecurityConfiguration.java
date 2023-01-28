@@ -83,15 +83,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("Key from heroku: " + pubKeyString);
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
+        pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+"," ").trim();
+        privKeyString = privKeyString.replaceAll("[\\s|\\t|\\r\\n]+"," ").trim();
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
-        privKeyString = privKeyString.replace("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst", "");
+//        privKeyString = privKeyString.replace("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst", "");
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-        RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
         System.out.println("after conversion Public: " + myKey.toString());
-        System.out.println("after conversion private: " + priv.toString());
+        System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
