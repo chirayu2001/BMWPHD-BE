@@ -84,15 +84,16 @@ public class SecurityConfiguration {
         System.out.println("Key from heroku: " + pubKeyString);
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
        // pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
-        privKeyString = privKeyString.replaceAll("\\s","").trim();
+        //privKeyString = privKeyString.replaceAll("\\s","").trim();
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+        System.out.println("after conversion Public: " + myKey.toString());
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
         RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
-        System.out.println("after conversion Public: " + myKey.toString());
+
         System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
