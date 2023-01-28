@@ -86,6 +86,7 @@ public class SecurityConfiguration {
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
+        privKeyString = privKeyString.replace("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrst", "");
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
         RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
