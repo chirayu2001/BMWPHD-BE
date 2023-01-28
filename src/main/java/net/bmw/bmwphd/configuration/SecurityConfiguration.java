@@ -62,25 +62,29 @@ public class SecurityConfiguration {
 //    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
-//    @Value("${jwt.public.key}")
-   // RSAPublicKey key;
-//    @Value("${jwt.private.key}")
-   // RSAPrivateKey priv;
+    @Value("${jwt.public.key}")
+    RSAPublicKey key;
+    @Value("${jwt.private.key}")
+    RSAPrivateKey priv;
 
     @Value("${pubKey}")
     String pubKeyString;
     @Value("${privKey}")
     String privKeyString;
 
+//    RSAPrivateKey priv;
+//    RSAPublicKey key;
+
     //int mod4 = privKeyString.length() % 4;
 
-    RSAPublicKey key;
-    RSAPrivateKey priv;
 
+
+//    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
+//
+//    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
 
     public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
-         this.key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
-        this.priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
+
     }
 //
 //
@@ -157,6 +161,7 @@ public class SecurityConfiguration {
     }
     @Bean
     JwtEncoder jwtEncoder() {
+        System.out.println(this.key.toString());
         JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
