@@ -83,6 +83,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("Key from heroku: " + pubKeyString);
+        System.out.println("priv from heroku: " + privKeyString + "length: " + privKeyString.length());
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
        // pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
 //        privKeyString = privKeyString.replaceAll("\\n","").trim();
@@ -103,8 +104,8 @@ public class SecurityConfiguration {
             }
         }
 
-        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
-        System.out.println("binCpk: "+binCpk);
+//        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
+//        System.out.println("binCpk: "+binCpk);
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
 
 //        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
