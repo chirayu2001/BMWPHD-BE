@@ -61,9 +61,9 @@ public class SecurityConfiguration {
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
 //    @Value("${jwt.public.key}")
-//    RSAPublicKey key;
+    RSAPublicKey key;
 //    @Value("${jwt.private.key}")
-//    RSAPrivateKey priv;
+    RSAPrivateKey priv;
 
     @Value("${pubKey}")
     String pubKeyString;
@@ -90,8 +90,9 @@ public class SecurityConfiguration {
 //        privKeyString = privKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
         //byte[] privBytes = privKeyString.getBytes(StandardCharsets.UTF_8);
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
-        RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
-        System.out.println("after conversion Public: " + key.toString());
+        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+        this.key = myKey;
+        System.out.println("after conversion Public: " + myKey.toString());
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(privBytes);
@@ -109,10 +110,10 @@ public class SecurityConfiguration {
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
 
 //        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-        RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+        this.priv = priv2;
 
-
-       //System.out.println("after conversion private: " + priv2.toString());
+       System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
