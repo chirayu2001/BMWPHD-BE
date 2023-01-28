@@ -86,7 +86,7 @@ public class SecurityConfiguration {
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
        // pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
         //privKeyString = privKeyString.replaceAll("\\n","");
-        byte[] privBytes = DatatypeConverter.parseHexBinary(privKeyString);
+        byte[] privBytes = privKeyString.getBytes(StandardCharsets.UTF_8);
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         System.out.println("after conversion Public: " + myKey.toString());
