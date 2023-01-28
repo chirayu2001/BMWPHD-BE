@@ -89,7 +89,7 @@ public class SecurityConfiguration {
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
-        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getUrlDecoder().decode(privKeyString));
         RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
         System.out.println("after conversion Public: " + myKey.toString());
