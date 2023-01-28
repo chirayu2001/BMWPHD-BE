@@ -26,6 +26,7 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.xml.bind.DatatypeConverter;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -85,12 +86,14 @@ public class SecurityConfiguration {
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
        // pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
         //privKeyString = privKeyString.replaceAll("\\n","");
+        byte[] privBytes = DatatypeConverter.parseHexBinary(privKeyString);
         X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
         RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
         System.out.println("after conversion Public: " + myKey.toString());
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
-        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
+        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(privBytes);
+        //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
         RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
 
