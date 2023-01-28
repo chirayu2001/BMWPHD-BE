@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,12 +74,12 @@ public class SecurityConfiguration {
 
     //int mod4 = privKeyString.length() % 4;
 
-    @Lazy(value = false)
-    RSAPublicKey key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
-    @Lazy(value = false)
-    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
+
+
 
     public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        RSAPublicKey key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
+        RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
     }
 //
 //
