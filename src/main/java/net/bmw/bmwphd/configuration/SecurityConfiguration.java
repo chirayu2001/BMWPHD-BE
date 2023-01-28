@@ -74,12 +74,13 @@ public class SecurityConfiguration {
 
     //int mod4 = privKeyString.length() % 4;
 
-
+    RSAPublicKey key;
+    RSAPrivateKey priv;
 
 
     public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        RSAPublicKey key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
-        RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
+         this.key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
+        this.priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
     }
 //
 //
