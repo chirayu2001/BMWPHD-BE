@@ -104,8 +104,8 @@ public class SecurityConfiguration {
             }
         }
 
-//        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
-//        System.out.println("binCpk: "+binCpk);
+        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
+        System.out.println("binCpk: "+binCpk);
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
 
 //        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
