@@ -109,10 +109,10 @@ public class SecurityConfiguration {
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
 
 //        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-        //RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
 
-       // System.out.println("after conversion private: " + priv2.toString());
+       //System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
