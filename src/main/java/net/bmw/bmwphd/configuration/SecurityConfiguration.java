@@ -9,6 +9,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,8 +42,8 @@ import java.util.Base64;
 @Configuration
 public class SecurityConfiguration {
 
-    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
-    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
+//    MyPrivateKeyConverter myPrivateKeyConverter = new MyPrivateKeyConverter();
+//    MyPublicKeyConverter myPublicKeyConverter = new MyPublicKeyConverter();
 //    @Value("${pubKey}")
 //    String pubKeyString;
 //    @Value("${privKey}")
@@ -70,9 +71,11 @@ public class SecurityConfiguration {
     @Value("${privKey}")
     String privKeyString;
 
-    int mod4 = privKeyString.length() % 4;
+    //int mod4 = privKeyString.length() % 4;
 
-    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));
+    @Lazy(value = false)
+    RSAPublicKey key= (RSAPublicKey) kf.generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString)));;
+    @Lazy(value = false)
     RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
 
     public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
