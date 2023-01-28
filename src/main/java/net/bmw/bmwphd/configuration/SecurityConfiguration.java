@@ -93,6 +93,15 @@ public class SecurityConfiguration {
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(privBytes);
+        int mod4 = privKeyString.length() % 4;
+
+        if (mod4 > 0 )
+        {
+            for(int i = 0; i < 4 - mod4; i++){
+                privKeyString += "=";
+            }
+        }
+
         byte[] binCpk = Base64.getDecoder().decode(privKeyString);
         System.out.println("binCpk: "+binCpk);
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
