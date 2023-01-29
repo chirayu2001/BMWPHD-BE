@@ -62,10 +62,10 @@ public class SecurityConfiguration {
 //    X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
 //    RSAPublicKey key = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
-    @Value("${jwt.public.key}")
-    RSAPublicKey key;
-    @Value("${jwt.private.key}")
-    RSAPrivateKey priv;
+//    @Value("${jwt.public.key}")
+//    RSAPublicKey key;
+//    @Value("${jwt.private.key}")
+//    RSAPrivateKey priv;
 
     @Value("${pubKey}")
     String pubKeyString;
@@ -96,38 +96,38 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("Key from heroku: " + pubKeyString);
-        System.out.println("priv from heroku: " + privKeyString + "length: " + privKeyString.length());
+//        System.out.println("Key from heroku: " + pubKeyString);
+//        System.out.println("priv from heroku: " + privKeyString + "length: " + privKeyString.length());
 //        RSAPrivateKey priv = myPrivateKeyConverter.convert(privKeyString);
        // pubKeyString = pubKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
 //        privKeyString = privKeyString.replaceAll("\\n","").trim();
 //        privKeyString = privKeyString.replaceAll("[\\s|\\t|\\r\\n]+","").trim();
         //byte[] privBytes = privKeyString.getBytes(StandardCharsets.UTF_8);
-        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
-        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
-        this.key = myKey;
-        System.out.println("after conversion Public: " + myKey.toString());
+//        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+//        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+//        this.key = myKey;
+//        System.out.println("after conversion Public: " + myKey.toString());
         //RSAPublicKey myKey = myPublicKeyConverter.convert(pubKeyString);
 
         //PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(privBytes);
-        int mod4 = privKeyString.length() % 4;
+//        int mod4 = privKeyString.length() % 4;
+//
+//        if (mod4 > 0 )
+//        {
+//            for(int i = 0; i < 4 - mod4; i++){
+//                privKeyString += "=";
+//            }
+//        }
 
-        if (mod4 > 0 )
-        {
-            for(int i = 0; i < 4 - mod4; i++){
-                privKeyString += "=";
-            }
-        }
-
-        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
-        System.out.println("binCpk: "+binCpk);
-        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
+     //   byte[] binCpk = Base64.getDecoder().decode(privKeyString);
+    //    System.out.println("binCpk: "+binCpk);
+    //    PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
 
 //        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString));
-        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
-        this.priv = priv2;
+     //   RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+    //    this.priv = priv2;
 
-       System.out.println("after conversion private: " + priv2.toString());
+    //   System.out.println("after conversion private: " + priv2.toString());
 
         // @formatter:off
         http.cors(Customizer.withDefaults())
@@ -156,14 +156,33 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.key).build();
+    JwtDecoder jwtDecoder() throws InvalidKeySpecException {
+        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
+        return NimbusJwtDecoder.withPublicKey(myKey).build();
     }
     @Bean
-    JwtEncoder jwtEncoder() {
+    JwtEncoder jwtEncoder() throws InvalidKeySpecException {
+        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKeyString));
+        RSAPublicKey myKey = (RSAPublicKey) kf.generatePublic(keySpecX509);
 
-        System.out.println("in the encoder: " + privKeyString);
-        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
+        int mod4 = privKeyString.length() % 4;
+
+        if (mod4 > 0 )
+        {
+            for(int i = 0; i < 4 - mod4; i++){
+                privKeyString += "=";
+            }
+        }
+        byte[] binCpk = Base64.getDecoder().decode(privKeyString);
+        PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
+        RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
+
+
+        System.out.println("in the encoder private: " + priv2.toString());
+        System.out.println("in the encoder public: " + myKey.toString());
+
+        JWK jwk = new RSAKey.Builder(myKey).privateKey(priv2).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
