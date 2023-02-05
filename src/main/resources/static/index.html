@@ -16,7 +16,8 @@
 <!--</p>-->
 <!--</body>-->
 <!--</html>-->
-<!DOCTYPE html>
+
+<!--<!DOCTYPE html>
 <html>
 <head>
     <title>BMWPHD</title>
@@ -51,5 +52,80 @@
 
 </div>
 
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMWPHDBackend</title>
+    <style>
+        body,h1 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            /*background-image: url('horse-be.jpg');*/
+            background-color: midnightblue;
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+        BMWPHD
+    </div>
+<!--    <div class="w3-display-middle">-->
+<!--        <h1 class="w3-jumbo w3-animate-top w3-center">BMWPHD</h1>-->
+<!--        <hr class="w3-border-grey" style="margin:auto;width:40%">-->
+<!--        <p class="w3-large w3-center">GET "/horses" to return all horses</p>-->
+<!--        <p class="w3-large w3-center">POST "/horses/search" returns all horses with the criteria specified in Request Body in JSON Fromat</p>-->
+<!--    </div>-->
+
+</div>
+<div >
+<h2>Horse Data</h2>
+<p class="w3-large w3-center">
+    Get "/horses" to return all horses
+    <br>
+    GET "horses/search" with specifications in Request Body to find certain criteria matching horses
+</p>
+<h2>User Data</h2>
+<p>
+    GET "/users" to return all users
+    <br>
+    GET "/users/customers" returns all customers
+    <br>
+    GET "/users/judges" returns all judges
+    <br>
+    GET "/users/{id}" returns a specific user
+    <br>
+    GET "/users/{id}/changeRequests" to return changeRequests a specific user has filled out
+    <br>
+    POST "/users" with user data in body to save a user
+    <br>
+    PUT "/users/{id}" with user data in body to update a user
+    <br>
+    DELETE "/users/{id}" to delete a user from database
+</p>
+<h2>ChangeRequest Data</h2>
+<p>
+    GET "/changeRequests" returns all changeRequests
+    <br>
+    GET "/changeRequests/pending" returns all pending changeRequests
+<!--    <br>-->
+<!--    GET "/changeRequests/OpenApproved" returns all approved changeRequests that have not been assigned-->
+<!--    <br>-->
+    GET "/changeRequests/{id}" returns a specific changeRequest
+    <br>
+    POST "/changeRequests" with changeRequest data in body to save a new changeRequest
+    <br>
+    PUT "/changeRequests/{id}" with changeRequest data in body to update changeRequest
+    <br>
+    DELETE "/changeRequests/{id}" to delete a specific changeRequest
+</p>
+</div>
 </body>
 </html>
