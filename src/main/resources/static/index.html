@@ -72,13 +72,21 @@
             filter: blur(8px);
             -webkit-filter: blur(8px);
             /*background-color: midnightblue;*/
-            min-height: 100%;
+            /*min-height: 100%;*/
+            /*background-position: center;*/
+            /*background-size: cover;*/
+            /*text-align: center;*/
+            /*align-content: center;*/
+            /*align-items: center;*/
+            /*child-align: middle;*/
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
             background-position: center;
+            background-repeat: no-repeat;
             background-size: cover;
-            text-align: center;
-            align-content: center;
-            align-items: center;
-            child-align: middle;
         }
         /* Position text in the middle of the page/image */
         .bg-text {
@@ -98,7 +106,8 @@
         }
     </style>
 </head>
-<body class="bgimg">
+<body>
+<div class="bgimg"></div>
 <div class="bg-text">
 
 <h1>Welcome to the BMWPHD Backend</h1>
