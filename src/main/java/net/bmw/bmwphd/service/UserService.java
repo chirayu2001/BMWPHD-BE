@@ -21,11 +21,11 @@ public class UserService implements UserDetailsService {
 
     private UserDao userDao;
     private PasswordEncoder encoder;
-    private IdWorker idWorker;
+   // private IdWorker idWorker;
 
-    public UserService(UserDao userDao, IdWorker idWorker) {
+    public UserService(UserDao userDao) {
         this.userDao = userDao;
-        this.idWorker = idWorker;
+       // this.idWorker = idWorker;
     }
 
     @Autowired
@@ -43,7 +43,7 @@ public class UserService implements UserDetailsService {
 
     public void save(User newUser) {
         newUser.setPassword(encoder.encode(newUser.getPassword()));
-        newUser.setId((int) idWorker.nextId());
+       // newUser.setId((int) idWorker.nextId());
         newUser.setActive(true);
         newUser.setUsername(newUser.getEmail());
         userDao.save(newUser);
