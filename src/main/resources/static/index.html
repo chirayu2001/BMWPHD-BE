@@ -63,8 +63,14 @@
     <style>
         body,h1 {font-family: "Raleway", sans-serif}
         body, html {height: 100%}
+        * {
+            box-sizing: border-box;
+        }
         .bgimg {
             background-image: url('horse-be.jpg');
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
             /*background-color: midnightblue;*/
             min-height: 100%;
             background-position: center;
@@ -74,9 +80,27 @@
             align-items: center;
             child-align: middle;
         }
+        /* Position text in the middle of the page/image */
+        .bg-text {
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 3px solid #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bgimg">
+<div class="bg-text">
+
 <h1>Welcome to the BMWPHD Backend</h1>
 <br>
 <h2>Horse Data</h2>
@@ -119,5 +143,6 @@
     <br>
     DELETE "/changeRequests/{id}" to delete a specific changeRequest
 </p>
+</div>
 </body>
 </html>
