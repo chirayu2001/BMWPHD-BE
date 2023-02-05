@@ -1,6 +1,8 @@
 package net.bmw.bmwphd.datainitializer;
 
+import net.bmw.bmwphd.dao.ChangeRequestDao;
 import net.bmw.bmwphd.dao.HorseDao;
+import net.bmw.bmwphd.domain.ChangeRequest;
 import net.bmw.bmwphd.domain.Horse;
 import net.bmw.bmwphd.domain.User;
 import net.bmw.bmwphd.service.HorseService;
@@ -19,12 +21,14 @@ public class DBDataInitializer implements CommandLineRunner {
     private HorseDao horseDao;
     private HorseService horseService;
     private UserService userService;
+    private ChangeRequestDao changeRequestDao;
     ArrayList<String[]> horses = new ArrayList<>();
     //ArrayList<ArrayList<String>> horses = new ArrayList<>();
-    public DBDataInitializer(HorseDao horseDao, HorseService horseService, UserService userService) {
+    public DBDataInitializer(HorseDao horseDao, HorseService horseService, UserService userService, ChangeRequestDao changeRequestDao) {
         this.horseDao = horseDao;
         this.horseService = horseService;
         this.userService = userService;
+        this.changeRequestDao = changeRequestDao;
     }
 
 
@@ -112,9 +116,9 @@ public class DBDataInitializer implements CommandLineRunner {
 //        horseDao.save(h2);
         User u4 = new User();
         u4.setPassword("123");
-        u4.setName("Chiyaru");
-        u4.setEmail("chiyaru@tcu.edu");
-        u4.setRole("Judge");
+        u4.setName("Chirayu");
+        u4.setEmail("chirayu@tcu.edu");
+        u4.setRole("Judge, Admin");
 
         User u6 = new User();
         u6.setPassword("123");
@@ -125,5 +129,19 @@ public class DBDataInitializer implements CommandLineRunner {
         userService.save(u4);
         userService.save(u6);
 
+        ChangeRequest changeRequest1 = new ChangeRequest();
+        changeRequest1.setAttribute("Dam");
+        changeRequest1.setSuggestedChange("New Dam");
+        changeRequest1.setStatus("Pending");
+        changeRequest1.setOwnerId(u4.getId());
+
+        ChangeRequest changeRequest2 = new ChangeRequest();
+        changeRequest2.setAttribute("Sire");
+        changeRequest2.setSuggestedChange("New Sire");
+        changeRequest2.setStatus("Pending");
+        changeRequest2.setOwnerId(u4.getId());
+
+        changeRequestDao.save(changeRequest1);
+        changeRequestDao.save(changeRequest2);
     }
 }
