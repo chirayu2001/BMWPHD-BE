@@ -3,6 +3,7 @@ package net.bmw.bmwphd.service;
 import net.bmw.bmwphd.dao.UserDao;
 import net.bmw.bmwphd.domain.MyUserPrincipal;
 import net.bmw.bmwphd.domain.User;
+import net.bmw.bmwphd.utils.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,9 +21,11 @@ public class UserService implements UserDetailsService {
 
     private UserDao userDao;
     private PasswordEncoder encoder;
+    private IdWorker idWorker;
 
-    public UserService(UserDao userDao) {
+    public UserService(UserDao userDao, IdWorker idWorker) {
         this.userDao = userDao;
+        this.idWorker = idWorker;
     }
 
     @Autowired
@@ -40,7 +43,7 @@ public class UserService implements UserDetailsService {
 
     public void save(User newUser) {
         newUser.setPassword(encoder.encode(newUser.getPassword()));
-//        newUser.setId((int) idWorker.nextId());
+        newUser.setId((int) idWorker.nextId());
         newUser.setActive(true);
         newUser.setUsername(newUser.getEmail());
         userDao.save(newUser);
