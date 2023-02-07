@@ -134,12 +134,14 @@ public class DBDataInitializer implements CommandLineRunner {
         changeRequest1.setSuggestedChange("New Dam");
         changeRequest1.setStatus("Pending");
         changeRequest1.setOwnerId(u4.getId());
+        changeRequest1.setHorseId("5");
 
         ChangeRequest changeRequest2 = new ChangeRequest();
         changeRequest2.setAttribute("Sire");
         changeRequest2.setSuggestedChange("New Sire");
         changeRequest2.setStatus("Pending");
         changeRequest2.setOwnerId(u4.getId());
+        changeRequest2.setHorseId("3");
 
         changeRequestDao.save(changeRequest1);
         changeRequestDao.save(changeRequest2);

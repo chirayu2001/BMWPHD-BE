@@ -15,17 +15,19 @@ public class ChangeRequest implements Serializable {
     private String suggestedChange;
     private Integer ownerId;
     private String status;
+    private String horseId;
 
     public ChangeRequest(){
 
     }
 
-    public ChangeRequest(Integer id, String attribute, String suggestedChange, String status, Integer ownerId) {
+    public ChangeRequest(Integer id, String attribute, String suggestedChange, String status, Integer ownerId, String horseId) {
         this.id = id;
         this.attribute = attribute;
         this.suggestedChange = suggestedChange;
         this.status = status;
         this.ownerId = ownerId;
+        this.horseId = horseId;
     }
 
     public Integer getId() {
@@ -66,5 +68,13 @@ public class ChangeRequest implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getHorseId() {
+        return horseId;
+    }
+
+    public void setHorseId(String horseId) {
+        this.horseId = horseId;
     }
 }
