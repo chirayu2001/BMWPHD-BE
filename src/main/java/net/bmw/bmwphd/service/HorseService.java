@@ -43,7 +43,7 @@ public class HorseService {
                     predicateList.add(cb.like(root.get("id").as(String.class), "%" + (String) searchMap.get("id") + "%"));
                 }
                 if (searchMap.get("name") != null && !"".equals(searchMap.get("name"))) {
-                    predicateList.add(cb.like(root.get("name").as(String.class), "%" + (String) searchMap.get("name") + "%"));
+                    predicateList.add(cb.like(root.get("name").as(String.class), "%" + (String) searchMap.get("name").toString().toLowerCase() + "%"));
                 }
                 if (searchMap.get("dam1") != null && !"".equals(searchMap.get("dam1"))) {
                     predicateList.add(cb.like(root.get("dam1").as(String.class), "%" + (String) searchMap.get("dam1") + "%"));
