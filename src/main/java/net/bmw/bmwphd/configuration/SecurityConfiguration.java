@@ -141,6 +141,7 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated()
                 )
                 .csrf((csrf) -> csrf.ignoringAntMatchers("/auth/login"))
+                .csrf((csrf) -> csrf.ignoringAntMatchers("/horses/search"))
                 .httpBasic(Customizer.withDefaults()) // using HTTP Basic Authentication
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
