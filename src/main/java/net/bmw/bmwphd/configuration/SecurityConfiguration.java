@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -133,6 +134,7 @@ public class SecurityConfiguration {
         http.cors(Customizer.withDefaults())
                 .authorizeHttpRequests((authorize) -> authorize
                         .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ROLE_admin")
+                        .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .antMatchers(HttpMethod.GET, "/horses").permitAll()
                         .antMatchers(HttpMethod.GET, "/").permitAll()
                         .antMatchers(HttpMethod.POST, "/horses/search").permitAll()
@@ -140,8 +142,9 @@ public class SecurityConfiguration {
                         // Disallow everything else...
                         .anyRequest().authenticated()
                 )
-                .csrf((csrf) -> csrf.ignoringAntMatchers("/auth/login"))
-                .csrf((csrf) -> csrf.ignoringAntMatchers("/horses/search"))
+                .csrf(AbstractHttpConfigurer::disable)
+               // .csrf((csrf) -> csrf.ignoringAntMatchers("/auth/login"))
+               // .csrf((csrf) -> csrf.ignoringAntMatchers("/horses/search"))
                 .httpBasic(Customizer.withDefaults()) // using HTTP Basic Authentication
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
