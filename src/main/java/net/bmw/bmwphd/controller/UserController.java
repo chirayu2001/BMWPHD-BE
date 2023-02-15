@@ -51,6 +51,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public Result update(@RequestBody User user, @PathVariable Integer id){
+        User current = (User) findById(id).getData();
+        user.setPassword(current.getPassword());
         service.update(id, user);
         return new Result(true, StatusCode.SUCCESS, "Update Success");
     }
