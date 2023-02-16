@@ -13,7 +13,7 @@ public class ChangeRequest implements Serializable {
     private Integer id;
     private String attribute;
     private String suggestedChange;
-    private Integer ownerId;
+    private String ownerId;
     private String status;
     private String horseId;
 
@@ -21,7 +21,7 @@ public class ChangeRequest implements Serializable {
 
     }
 
-    public ChangeRequest(Integer id, String attribute, String suggestedChange, String status, Integer ownerId, String horseId) {
+    public ChangeRequest(Integer id, String attribute, String suggestedChange, String status, String ownerId, String horseId) {
         this.id = id;
         this.attribute = attribute;
         this.suggestedChange = suggestedChange;
@@ -54,11 +54,11 @@ public class ChangeRequest implements Serializable {
         this.suggestedChange = suggestedChange;
     }
 
-    public Integer getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Integer ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 
