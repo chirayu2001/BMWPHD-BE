@@ -8,8 +8,7 @@ import java.util.List;
 @Entity
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
     private String username;
     private String password;
     private String name;
@@ -20,7 +19,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id, String username, String password, String name, String email, String role, boolean isActive, List<ChangeRequest> requests) {
+    public User(String id, String username, String password, String name, String email, String role, boolean isActive, List<ChangeRequest> requests) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -31,11 +30,11 @@ public class User implements Serializable {
     }
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
