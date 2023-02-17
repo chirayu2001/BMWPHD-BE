@@ -55,7 +55,7 @@ public class ChangeRequestService {
         return changeRequestDao.findAllByStatus("Approved");
     }
 
-    public List<ChangeRequest> findChangeRequestsByOwnerId(Integer id) {
+    public List<ChangeRequest> findChangeRequestsByOwnerId(String id) {
         return changeRequestDao.findAllByOwnerId(id);
     }
 }

@@ -37,7 +37,7 @@ public class ChangeRequestController {
     }
 
     @GetMapping("/owner/{id}")
-    public Result findChangeRequestsByOwnerId(@PathVariable Integer id){
+    public Result findChangeRequestsByOwnerId(@PathVariable String id){
         return new Result(true, StatusCode.SUCCESS, "Find All By OwnerId Success", service.findChangeRequestsByOwnerId(id));
     }
 

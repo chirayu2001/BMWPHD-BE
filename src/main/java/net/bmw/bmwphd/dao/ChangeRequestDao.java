@@ -8,5 +8,5 @@ import java.util.List;
 public interface ChangeRequestDao extends JpaRepository<ChangeRequest, Integer> {
     List<ChangeRequest> findAllByStatus(String status);
 
-    List<ChangeRequest> findAllByOwnerId(Integer id);
+    List<ChangeRequest> findAllByOwnerId(String id);
 }
