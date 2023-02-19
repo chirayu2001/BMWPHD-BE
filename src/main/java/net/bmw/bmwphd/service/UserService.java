@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void update(Integer userId, User updatedUser) {
-        updatedUser.setId(userId.toString());
+        updatedUser.setId(userId);
         updatedUser.setPassword(updatedUser.getPassword());
         userDao.save(updatedUser);
     }
