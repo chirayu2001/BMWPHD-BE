@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class User implements Serializable {
     @Id
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private String id;
     private String username;
     private String password;

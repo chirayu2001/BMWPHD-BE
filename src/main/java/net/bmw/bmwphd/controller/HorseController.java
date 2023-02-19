@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * <p>
- *     The entry point for api calls from the FrontEnd.
+ *     The entry point for api calls from the FrontEnd for Horse Queries.
  *     It wraps the object returned from {@link HorseService} into {@link Result} and returns it to FrontEnd.
  *     <br>
  *     The base url for this api is: <strong>/horses</strong>
