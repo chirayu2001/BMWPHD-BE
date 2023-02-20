@@ -49,4 +49,9 @@ public class HorseController {
     public Result findSearch(@RequestBody Map searchMap) {
         return new Result(true, StatusCode.SUCCESS, "Query Successful", horseService.findSearch(searchMap));
     }
+
+    @GetMapping("/{id}")
+    public Result findById(@PathVariable String id){
+        return new Result(true, StatusCode.SUCCESS, "Find By Id Success", horseService.findById(id));
+    }
 }

@@ -2,6 +2,7 @@ package net.bmw.bmwphd.service;
 
 import net.bmw.bmwphd.dao.HorseDao;
 import net.bmw.bmwphd.domain.Horse;
+import net.bmw.bmwphd.domain.User;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,10 @@ public class HorseService {
     public List<Horse> findSearch(Map whereMap) {
         Specification<Horse> specification = createSpecification(whereMap);
         return horseDao.findAll(specification);
+    }
+
+    public Horse findById(String horseId) {
+        return horseDao.findById(horseId).get();
     }
 
     private Specification<Horse> createSpecification(Map searchMap) {
