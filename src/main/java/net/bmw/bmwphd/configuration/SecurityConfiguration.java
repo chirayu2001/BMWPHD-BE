@@ -140,6 +140,7 @@ public class SecurityConfiguration {
                         .antMatchers(HttpMethod.POST, "/horses/search").permitAll()
                         .antMatchers(HttpMethod.GET, "/horse-be.jpg").permitAll()
                         .antMatchers(HttpMethod.POST, "/users").permitAll()
+                        .antMatchers(HttpMethod.GET, "/horses/**").permitAll()
                         // Disallow everything else...
                         .anyRequest().authenticated()
                 )
