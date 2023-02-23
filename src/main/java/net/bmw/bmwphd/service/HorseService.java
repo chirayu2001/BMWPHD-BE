@@ -37,6 +37,11 @@ public class HorseService {
         return horseDao.findById(horseId).get();
     }
 
+    public void update(String horseId, Horse updatedHorse) {
+        updatedHorse.setId(horseId);
+        horseDao.save(updatedHorse);
+    }
+
     private Specification<Horse> createSpecification(Map searchMap) {
 
         return new Specification<Horse>() {

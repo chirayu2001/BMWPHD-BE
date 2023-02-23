@@ -3,6 +3,7 @@ package net.bmw.bmwphd.controller;
 import net.bmw.bmwphd.domain.Horse;
 import net.bmw.bmwphd.domain.Result;
 import net.bmw.bmwphd.domain.StatusCode;
+import net.bmw.bmwphd.domain.User;
 import net.bmw.bmwphd.service.HorseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +54,20 @@ public class HorseController {
     @GetMapping("/{id}")
     public Result findById(@PathVariable String id){
         return new Result(true, StatusCode.SUCCESS, "Find By Id Success", horseService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public Result update(@RequestBody Horse horse, @PathVariable String id){
+        Horse current = (Horse) findById(id).getData();
+        // current.set(changeField)
+        current.setId(current.getId());
+        horseService.update(id, horse);
+        /*
+
+         */
+
+        //current.set(newRole)
+
+        return new Result(true, StatusCode.SUCCESS, "Update Success");
     }
 }
