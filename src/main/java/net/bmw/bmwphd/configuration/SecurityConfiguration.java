@@ -6,11 +6,9 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,11 +27,8 @@ import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthen
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
 
-import javax.xml.bind.DatatypeConverter;
-import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
@@ -84,7 +79,7 @@ public class SecurityConfiguration {
 //
 //    RSAPrivateKey priv = (RSAPrivateKey) kf.generatePrivate(new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privKeyString)));
 
-    public SecurityConfiguration() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public SecurityConfiguration() throws NoSuchAlgorithmException {
 
     }
 //
@@ -177,17 +172,16 @@ public class SecurityConfiguration {
 
         if (mod4 > 0 )
         {
-            for(int i = 0; i < 4 - mod4; i++){
-                privKeyString += "=";
-            }
+            privKeyString = privKeyString +
+                    "=".repeat(4 - mod4);
         }
         byte[] binCpk = Base64.getDecoder().decode(privKeyString);
         PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(binCpk);
         RSAPrivateKey priv2 = (RSAPrivateKey) kf.generatePrivate(keySpecPKCS8);
 
 
-        System.out.println("in the encoder private: " + priv2.toString());
-        System.out.println("in the encoder public: " + myKey.toString());
+//        System.out.println("in the encoder private: " + priv2.toString());
+//        System.out.println("in the encoder public: " + myKey.toString());
 
         JWK jwk = new RSAKey.Builder(myKey).privateKey(priv2).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));

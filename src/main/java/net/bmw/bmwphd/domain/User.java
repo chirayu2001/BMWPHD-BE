@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name="user_table") // User is reserved in postgres
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.AUTO)
