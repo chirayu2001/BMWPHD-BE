@@ -1,20 +1,14 @@
 package net.bmw.bmwphd.domain;
 
-import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@Entity
+@Entity (name = "horses")
 public class Horse implements Serializable {
     @Id
     private String id;
     private String name;
-   // private String dam;
-   // private String sire;
     private String sire1;
     private String dam1;
     private String sire2;
@@ -30,10 +24,10 @@ public class Horse implements Serializable {
     private String year;
     private String nominator;
 
-    public Horse() {
+    public Horse () {
     }
 
-    public Horse(String id, String name, String sire1, String dam1, String foal_date, String nominator, String european_opt,String year){
+    public Horse (String id, String name, String sire1, String dam1, String foal_date, String nominator, String european_opt, String year) {
         this.id = id;
         this.name = name;
         this.sire1 = sire1;
@@ -44,7 +38,7 @@ public class Horse implements Serializable {
         this.year = year;
     }
 
-    public Horse(String id, String name, String sire1, String dam1, String sire2, String dam2){
+    public Horse (String id, String name, String sire1, String dam1, String sire2, String dam2) {
         this.id = id;
         this.name = name;
         this.sire1 = sire1;
@@ -53,7 +47,7 @@ public class Horse implements Serializable {
         this.dam2 = dam2;
     }
 
-    public Horse(String id, String name, String sire1, String dam1, String sire2, String dam2, String maneuver_score, String lte, String pe, String show, String horse_class, String level) {
+    public Horse (String id, String name, String sire1, String dam1, String sire2, String dam2, String maneuver_score, String lte, String pe, String show, String horse_class, String level) {
         this.id = id;
         this.name = name;
         this.sire1 = sire1;
@@ -68,131 +62,144 @@ public class Horse implements Serializable {
         this.level = level;
     }
 
-    public String getManeuver_score() {
+    public String getManeuver_score () {
         return maneuver_score;
     }
 
-    public void setManeuver_score(String maneuver_score) {
+    public void setManeuver_score (String maneuver_score) {
         this.maneuver_score = maneuver_score;
     }
 
-    public String getLte() {
+    public String getLte () {
         return lte;
     }
 
-    public void setLte(String lte) {
+    public void setLte (String lte) {
         this.lte = lte;
     }
 
-    public String getPe() {
+    public String getPe () {
         return pe;
     }
 
-    public void setPe(String pe) {
+    public void setPe (String pe) {
         this.pe = pe;
     }
 
-    public String getShow() {
+    public String getShow () {
         return show;
     }
 
-    public void setShow(String show) {
+    public void setShow (String show) {
         this.show = show;
     }
 
-    public String getHorse_class() {
+    public String getHorse_class () {
         return horse_class;
     }
 
-    public void setHorse_class(String horse_class) {
+    public void setHorse_class (String horse_class) {
         this.horse_class = horse_class;
     }
 
-    public String getLevel() {
+    public String getLevel () {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel (String level) {
         this.level = level;
     }
 
-    public String getId() {
+    public String getId () {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId (String id) {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name) {
         this.name = name;
     }
 
-    public String getSire1() {
+    public String getSire1 () {
         return sire1;
     }
 
-    public void setSire1(String sire1) {
+    public void setSire1 (String sire1) {
         this.sire1 = sire1;
     }
 
-    public String getDam1() {
+    public String getDam1 () {
         return dam1;
     }
 
-    public void setDam1(String dam1) {
+    public void setDam1 (String dam1) {
         this.dam1 = dam1;
     }
 
-    public String getSire2() {
+    public String getSire2 () {
         return sire2;
     }
 
-    public void setSire2(String sire2) {
+    public void setSire2 (String sire2) {
         this.sire2 = sire2;
     }
 
-    public String getDam2() {
+    public String getDam2 () {
         return dam2;
     }
 
-    public void setDam2(String dam2) {
+    public void setDam2 (String dam2) {
         this.dam2 = dam2;
     }
 
-    public String getFoal_date() {
+    public String getFoal_date () {
         return foal_date;
     }
 
-    public void setFoal_date(String foal_date) {
+    public void setFoal_date (String foal_date) {
         this.foal_date = foal_date;
     }
 
-    public String getEuropean_opt() {
+    public String getEuropean_opt () {
         return european_opt;
     }
 
-    public void setEuropean_opt(String european_opt) {
+    public void setEuropean_opt (String european_opt) {
         this.european_opt = european_opt;
     }
 
-    public String getYear() {
+    public String getYear () {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear (String year) {
         this.year = year;
     }
 
-    public String getNominator() {
+    public String getNominator () {
         return nominator;
     }
 
-    public void setNominator(String nominator) {
+    public void setNominator (String nominator) {
         this.nominator = nominator;
+    }
+
+    @Override
+    public int hashCode () {
+        return getClass ().hashCode ();
+    }
+
+    @Override
+    public boolean equals (final Object o) {
+        if (this == o) return true;
+        if (o == null || org.hibernate.Hibernate.getClass (this) != org.hibernate.Hibernate.getClass (o)) return false;
+        final net.bmw.bmwphd.domain.Horse horse = (net.bmw.bmwphd.domain.Horse) o;
+        return getId () != null && java.util.Objects.equals (getId (), horse.getId ());
     }
 }

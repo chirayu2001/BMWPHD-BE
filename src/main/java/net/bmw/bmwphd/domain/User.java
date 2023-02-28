@@ -1,14 +1,16 @@
 package net.bmw.bmwphd.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name="user_table") // User is reserved in postgres
+@Entity (name = "users") // User is reserved in postgres
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String password;
@@ -17,10 +19,10 @@ public class User implements Serializable {
     private String role;
     private boolean isActive;
 
-    public User() {
+    public User () {
     }
 
-    public User(Integer id, String username, String password, String name, String email, String role, boolean isActive, List<ChangeRequest> requests) {
+    public User (Integer id, String username, String password, String name, String email, String role, boolean isActive, List<ChangeRequest> requests) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -31,60 +33,60 @@ public class User implements Serializable {
     }
 
 
-    public Integer getId() {
+    public Integer getId () {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId (Integer id) {
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getUsername () {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername (String username) {
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword () {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword (String password) {
         this.password = password;
     }
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name) {
         this.name = name;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 
 
-    public String getRole() {
+    public String getRole () {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole (String role) {
         this.role = role;
     }
 
-    public boolean isActive() {
+    public boolean isActive () {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive (boolean active) {
         this.isActive = active;
     }
 }
