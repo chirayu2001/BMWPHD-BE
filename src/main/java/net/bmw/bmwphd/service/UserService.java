@@ -3,7 +3,6 @@ package net.bmw.bmwphd.service;
 import net.bmw.bmwphd.dao.UserDao;
 import net.bmw.bmwphd.domain.MyUserPrincipal;
 import net.bmw.bmwphd.domain.User;
-import net.bmw.bmwphd.utils.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,11 +28,11 @@ public class UserService implements UserDetailsService {
     }
 
     @Autowired
-    public void setEncoder(PasswordEncoder encoder){
+    public void setEncoder(PasswordEncoder encoder) {
         this.encoder = encoder;
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userDao.findAll();
     }
 
@@ -62,12 +61,12 @@ public class UserService implements UserDetailsService {
     }
 
     //for spirit director user management
-    public List<User> findAllFans(){
+    public List<User> findAllFans() {
         return userDao.findAllByRoleAndIsActive("Fan", true);
     }
 
     //to see all judges
-    public List<User> findAllJudges(){
+    public List<User> findAllJudges() {
         return userDao.findAllByRoleAndIsActive("Judge", true);
     }
 
