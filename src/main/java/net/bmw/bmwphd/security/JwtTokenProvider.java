@@ -20,6 +20,7 @@ public class JwtTokenProvider {
     public void setEncoder(JwtEncoder encoder) {
         this.encoder = encoder;
     }
+
     public String createToken(Authentication authentication) {
         Instant now = Instant.now();
         long expiry = 36000L;
@@ -35,4 +36,12 @@ public class JwtTokenProvider {
                 .build();
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
+    //    public boolean isValid(String token) {
+//        DecodedJWT jwt = JWT.decode(token);
+//        if( jwt.getExpiresAt().before(new Date())) {
+//            System.out.println("token is expired");
+//        }
+//        if (!claims.getExpiresAt().isBefore(Instant.now())) return true;
+//        else return false;
+//    }
 }
