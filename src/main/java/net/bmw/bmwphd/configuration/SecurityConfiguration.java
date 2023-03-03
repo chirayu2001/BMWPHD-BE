@@ -62,7 +62,7 @@ public class SecurityConfiguration {
                         .antMatchers(HttpMethod.POST, "/users").permitAll()
                         .antMatchers(HttpMethod.GET, "/horses/**").permitAll()
                         .antMatchers(HttpMethod.GET, "/.well-known/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/token").permitAll()
+                        .antMatchers(HttpMethod.GET, "/token/**").permitAll()
                         // Disallow everything else...
                         .anyRequest().authenticated()
                 )
