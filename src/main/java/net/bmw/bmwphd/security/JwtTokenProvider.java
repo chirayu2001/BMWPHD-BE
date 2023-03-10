@@ -30,7 +30,7 @@ public class JwtTokenProvider {
 
     public String createToken(Authentication authentication) {
         Instant now = Instant.now();
-        long expiry = 36000L;
+        long expiry = 60L;
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" ")); // MUST BE space-delimited!!!

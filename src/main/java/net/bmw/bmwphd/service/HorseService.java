@@ -2,14 +2,10 @@ package net.bmw.bmwphd.service;
 
 import net.bmw.bmwphd.dao.HorseDao;
 import net.bmw.bmwphd.domain.Horse;
-import net.bmw.bmwphd.domain.User;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +110,13 @@ public class HorseService {
                     predicateList.add(cb.like(
                             cb.lower(root.get("level").as(String.class)),
                             "%" + (String) searchMap.get("level").toString().toLowerCase() + "%"));
+                }
+                if (searchMap.get("riderList") != null && !"".equals(searchMap.get("riderList"))) {
+                    Join join = root.join("riderList");
+                    return cb.equal(join.get("riderId"), searchMap.get("riderList"));
+//                    predicateList.add(cb.like(
+//                            cb.lower(root.get("level").as(String.class)),
+//                            "%" + (String) searchMap.get("level").toString().toLowerCase() + "%"));
                 }
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
 
