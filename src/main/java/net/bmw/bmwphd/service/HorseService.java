@@ -11,6 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>
+ * The service for handling the functions in {@link net.bmw.bmwphd.controller.HorseController}.
+ * It returns the object returned from {@link HorseDao} to {@link net.bmw.bmwphd.controller.HorseController}.
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 @Service
 @Transactional
 public class HorseService {
@@ -20,24 +28,43 @@ public class HorseService {
         this.horseDao = horseDao;
     }
 
+    /**
+     * @return the list of all horses.
+     */
     public List<Horse> findAll() {
         return horseDao.findAll();
     }
 
+    /**
+     * @param whereMap - key-value pairs of criteria to look for.
+     * @return the list of all horses that match the criteria specified in searchMap.
+     */
     public List<Horse> findSearch(Map whereMap) {
         Specification<Horse> specification = createSpecification(whereMap);
         return horseDao.findAll(specification);
     }
 
+    /**
+     * @param horseId - id of the horse needed to be retrieved.
+     * @return {@link Horse} with the specified id.
+     */
     public Horse findById(String horseId) {
         return horseDao.findById(horseId).get();
     }
 
+    /**
+     * @param horseId      - id of the horse needed to be updated.
+     * @param updatedHorse - the new Horse object.
+     */
     public void update(String horseId, Horse updatedHorse) {
         updatedHorse.setId(horseId);
         horseDao.save(updatedHorse);
     }
 
+    /**
+     * @param searchMap - key-value pairs of criteria to look for
+     * @return Specification of all horses that match the criteria specified in searchMap. It is wrapped in Result object
+     */
     private Specification<Horse> createSpecification(Map searchMap) {
 
         return new Specification<Horse>() {

@@ -24,7 +24,6 @@ public class Horse implements Serializable {
     private String year;
     private String nominator;
 //    @ManyToMany(mappedBy = "horseList")
-//    @JoinTable(
 //    private List<Rider> riderList;
 
     public Horse() {

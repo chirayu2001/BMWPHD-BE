@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>
+ * The service for handling the functions for Authentication.
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 @Service
 public class AuthService {
     private JwtTokenProvider jwtTokenProvider;
@@ -19,6 +26,10 @@ public class AuthService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    /**
+     * @param authentication - {@link Authentication} object with user details for which Login info is needed.
+     * @return Map of Login User Info.
+     */
     public Map<String, Object> createLoginInfo(Authentication authentication) {
         String token = jwtTokenProvider.createToken(authentication);
         MyUserPrincipal principal = (MyUserPrincipal) authentication.getPrincipal();
