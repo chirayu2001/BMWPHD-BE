@@ -58,7 +58,8 @@ public class HorseController {
     }
 
     /**
-     * @param id - id of the Horse that needs to be updated
+     * @param id    - id of the Horse that needs to be updated
+     * @param horse - the new Horse object
      * @return Result object specifying whether the update was successful or not
      */
     @PutMapping("/{id}")

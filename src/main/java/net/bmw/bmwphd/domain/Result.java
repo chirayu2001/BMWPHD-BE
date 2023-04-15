@@ -1,5 +1,12 @@
 package net.bmw.bmwphd.domain;
 
+/**
+ * <p>
+ * Wrapper class for data communication between client and server.
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 public class Result {
     private boolean flag; //true: success, false: not success
     private Integer code; //return status code. e.g. 200

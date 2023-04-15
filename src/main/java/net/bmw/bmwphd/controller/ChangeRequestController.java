@@ -79,7 +79,8 @@ public class ChangeRequestController {
     }
 
     /**
-     * @param id - id of the change request that needs to be updated.
+     * @param changeRequest - the new ChangeRequest object
+     * @param id            - id of the change request that needs to be updated.
      * @return Result object specifying whether the update was successful or not.
      */
     @PutMapping("/{id}")

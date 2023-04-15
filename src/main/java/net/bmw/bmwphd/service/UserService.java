@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- * The service for handling the functions in {@link net.bmw.bmwphd.controller.UserControllerr}.
+ * The service for handling the functions in {@link net.bmw.bmwphd.controller.UserController}.
  * It returns the object returned from {@link UserDao} to {@link net.bmw.bmwphd.controller.UserController}.
  * </p>
  *

@@ -13,6 +13,13 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * <p>
+ * Class for providing JWT token, checking its validity, and encoding and decoding it.
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 @Component
 public class JwtTokenProvider {
     private JwtEncoder encoder;

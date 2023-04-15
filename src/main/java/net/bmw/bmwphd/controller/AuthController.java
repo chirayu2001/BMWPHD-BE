@@ -31,6 +31,7 @@ public class AuthController {
     /**
      * @param authentication - username and password as Basic Auth Authentication format
      * @return the user info for the logged-in user. It is wrapped in Result object
+     * @throws Exception - throws exception if Authentication fails
      */
     @PostMapping("/login")
     public Result login(Authentication authentication) throws Exception {

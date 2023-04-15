@@ -4,6 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+/**
+ * <p>
+ * Class for Horse Entity
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 @Entity(name = "horses")
 public class Horse implements Serializable {
     @Id

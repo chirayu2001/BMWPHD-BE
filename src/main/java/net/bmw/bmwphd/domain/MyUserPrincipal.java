@@ -7,6 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * <p>
+ * Class for MyUserPrincipal Entity
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 public class MyUserPrincipal implements UserDetails {
     private User user;
     private List<GrantedAuthority> authorities;
@@ -51,7 +58,7 @@ public class MyUserPrincipal implements UserDetails {
         return user.isActive();
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 }

@@ -1,5 +1,12 @@
 package net.bmw.bmwphd.domain;
 
+/**
+ * <p>
+ * Wrapper Class for Status Codes
+ * </p>
+ *
+ * @author Chirayu Jain
+ */
 public class StatusCode {
     public static final int SUCCESS = 200;//Success
     public static final int FAILURE = 400;//Failure

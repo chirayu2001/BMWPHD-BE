@@ -77,7 +77,8 @@ public class UserController {
     }
 
     /**
-     * @param id - the id of the user that needs to be updated
+     * @param user - the new User object
+     * @param id   - the id of the user that needs to be updated
      * @return the <strong>Result</strong> object mentioning if the Update was successful
      */
     @PutMapping("/{id}")
